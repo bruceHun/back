@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	function ajaxFunction(val) {
+		var httpxml;
+		try {
+			httpxml = new XMLHttpRequest();
+		} catch (e) {
+			try {
+				httpxml = new ActiveXObject("Msxm12.XMLHTTP");
+			} catch (e) {
+				try {
+					httpxml = new ActiveXObject("Microsoft.XMLHTTP");
+				} catch (e) {
+					alert("Your browser does not support AJAX!");
+					return false;
+				}
+			}
+		}
+	}
+
+	function stateChanged() {
+		if (httpxml.readyState == 4) {
+			var myObject = JSON.parse(httpxml.responseText);
+			var str = "<table><tr><th>ProductID</th>" + "<th>Barcode</th>"
+					+ "<th>CategoryID</th>" + "<th>ProductName</th>"
+					+ "<th>ProductUnit</th>" + "<th>Capacity</th>"
+					+ "<th>UnitPrice</th>" + "<th>Discontinued</th>"
+					+ "<th>Description</th></tr>";
+
+			for (i = 0; i < myObject.data.lengh; i++) {
+				str = str + "<tr><td>" + myObject.data[i].ProductID
+						+ "</td><td>" + myObject.data[i].Barcode + "</td><td>"
+						+ myObject.data[i].CategoryID + "</td><td>"
+						+ myObject.data[i].ProductName + "</td><td>"
+						+ myObject.data[i].ProductUnit + "</td><td>"
+						+ myObject.data[i].Capacity + "</td><td>"
+						+ myObject.data[i].UnitPrice + "</td><td>"
+						+ myObject.data[i].Discontinued + "</td><td>"
+						+ myObject.data[i].Description + "</td></tr>";
+
+				var endrecord = myObject.value.endrecord
+				myForm.end_record.value = endrecord;
+
+				if (myObject.value.end == "yes") {
+					document.getElementById("fwd").style.display = 'inline';
+				} else {
+					document.getElementById("fwd").style.display = 'none';
+				}
+
+				if (myObject.value.startrecord == "yes") {
+					document.getElementById("back").style.display = 'inline';
+				} else {
+					document.getElementById("back").style.display = "none";
+
+				}
+
+				str = str + "</table>"
+				document.getElementById("txtHint").innerHTML = str;
+			}
+		}
+		// posting data to backend
+		var url = "phpajaxdb.php";
+		var myendrecord = myForm.end_record.value;
+
+		url = url + "?endrecord=" + myendrecord;
+		url = url + "&direction=" + val;
+		url = url + "&sid=" + Math.random();
+
+		httpxml.onreadystatechange = stateChanged;
+		httpxml.open("GET", url, true);
+		httpxml.send(null);
+
+		document.getElementById("txtHint").innerHTML = "Please wait...";
+	}
+</script>
+</head>
+<body onload="ajaxFunction('fw');">
+	<h3>Display Location Address</h3>
+	<form name="myForm" onsubmit="ajaxFunction(this.form);return false">
+		<input name="end_record" type="hidden" value="0">
+		<table>
+			<tr>
+				<td colspan="2">
+					<div id="txtHint">
+						<b>Records will be displayed here</b>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td><input id="back" onclick="ajaxFunction('bk');return false"
+					type="button" value="Prev"></td>
+				<td><input id="fwd" onclick="ajaxFunction('fw');return false"
+					type="button" value="Next"></td>
+			</tr>
+		</table>
+
+	</form>
+</body>
+</html>
