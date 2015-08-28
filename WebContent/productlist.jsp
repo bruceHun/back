@@ -46,20 +46,20 @@
 			%>
 
 			<div class="container">
-				<div>
-					<table class="table table-hover">
+				<div class="table-responsive">
+					<table class="table table-bordered table-hover">
 						<tr>
-							<th>ProductID</th>
-							<th>Barcode</th>
-							<th>CategoryID</th>
-							<th>ProductName</th>
-							<th>ProductUnit</th>
-							<th>Capacity</th>
-							<th>UnitPrice</th>
-							<th>Discontinued</th>
-							<th>Description</th>
-							<th>Edit</th>
-							<th>Del</th>
+							<th width="75" class="text-info">產品編號</th>
+							<th width="75" class="text-info">國碼</th>
+							<th width="75" class="text-info">類別編號</th>
+							<th width="110" class="text-info">產品名稱</th>
+							<th width="75" class="text-info">單位</th>
+							<th width="75" class="text-info">容量</th>
+							<th width="75" class="text-info">單價</th>
+							<th width="75" class="text-info">產品下架</th>
+							<th class="text-info">產品資訊</th>
+							<th class="text-info">編輯</th>
+							<th class="text-info">刪除</th>
 						</tr>
 						<%
 							for (Product p : list) {
@@ -75,11 +75,11 @@
 							<td><%=p.getDiscontinued()%></td>
 							<td><%=p.getDescription()%></td>
 							<td><a href="ProductEdit.jsp?id=<%=p.getProductID()%>">
-									<button type="button" class="btn btn-primary btn-sm">Edit</button>
+									<button type="button" class="btn btn-primary btn-sm">編輯</button>
 							</a></td>
 							<td><a href="ProductDelCode.jsp?id=<%=p.getProductID()%>"
 								onclick="return confirm('確認刪除');">
-									<button type="button" class="btn btn-danger btn-sm">Del</button>
+									<button type="button" class="btn btn-danger btn-sm">刪除</button>
 							</a></td>
 						</tr>
 						<%
@@ -155,21 +155,22 @@
 				</div>
 
 				<div>
+				
 					<%
 						if (pg > 1) {
 					%>
-					<input type="button" name="prev" value="上一頁"
-						onclick="location.href='productlist.jsp?p=<%=(pg - 1)%>'">
-					<a href="productlist.jsp?p=<%=(pg - 1)%>">上一頁</a>
+					  
+					  <ul class="pager">
+					    <li><a href="productlist.jsp?p=<%=(pg - 1)%>">上一頁</a></li>
 					<%
 						}
 					%>
 					<%
 						if (pg < TotalPages) {
 					%>
-					<input type="button" name="next" value="下一頁"
-						onclick="location.href='productlist.jsp?p=<%=(pg + 1)%>'">
-					<a href="productlist.jsp?p=<%=(pg + 1)%>">下一頁</a>
+					    <li><a href="productlist.jsp?p=<%=(pg + 1)%>">下一頁</a></li>
+					  </ul>
+					
 					<%
 						}
 					%>
@@ -186,10 +187,13 @@
 
 			</div>
 
-			<div class="panel-footer text-center">
-				<p>Copyright (c) 2015 版權聲明</p>
-			</div>
+
 		</div>
+		
+		<div id="footer">
+			<jsp:include page="footer.jsp" />
+		</div>
+		
 	</div>
 </body>
 </html>

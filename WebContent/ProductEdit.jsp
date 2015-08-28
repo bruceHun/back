@@ -44,84 +44,62 @@
 
 
 			<div class="container">
-				<form class="form-horizontal" name="student"
+				<form class="form-horizontal" name="product"
 					action="ProductEditCode.jsp" method="post">
 					<input type="hidden" name=productid
 						value="<%out.print(p.getProductID());%>" />
 
 					<!-- -------------------------------------------------------------------------------------- -->
-					<div>
+					<div class="col-xs-6">
 						<div class="form-group ">
-							<div class="col-xs-2">
-								<label for="barcode" class="col-sm-4 control-label">國碼：</label>
-							</div>
-							<div class="col-sm-10">
-								<input type="text" class="form-control" id="barcode"
-									name="barcode" placeholder="國碼"
-									value="<%out.print(p.getBarcode());%>">
-							</div>
+							<label for="barcode">國碼：</label> <input type="text"
+								class="form-control" id="barcode" name="barcode"
+								placeholder="國碼" value="<%out.print(p.getBarcode());%>">
 						</div>
 
 						<div class="form-group">
-							<label for="categoryid" class="col-sm-2 control-label">類別編號：</label>
-							<div class="col-sm-10">
-								<input type="text" class="form-control" id="categoryid"
-									name="categoryid" placeholder="類別編號"
-									value="<%out.print(p.getCategoryID());%>">
-							</div>
+							<label for="categoryid">類別編號：</label> <input type="text"
+								class="form-control" id="categoryid" name="categoryid"
+								placeholder="類別編號" value="<%out.print(p.getCategoryID());%>">
 						</div>
 
 						<div class="form-group">
-							<label for="pname" class="col-sm-2 control-label">商品名稱：</label>
-							<div class="col-sm-10">
-								<input type="text" class="form-control" id="pname" name="pname"
-									placeholder="商品名稱" value="<%out.print(p.getProductName());%>">
-							</div>
+							<label for="pname">商品名稱：</label> <input type="text"
+								class="form-control" id="pname" name="pname" placeholder="商品名稱"
+								value="<%out.print(p.getProductName());%>">
 						</div>
 
 						<div class="form-group">
-							<label for="unit" class="col-sm-2 control-label">商品單位：</label>
-							<div class="col-sm-10">
-								<input type="text" class="form-control" id="unit" name="unit"
-									placeholder="商品單位" value="<%out.print(p.getProductUnit());%>">
-							</div>
+							<label for="unit">商品單位：</label> <input type="text"
+								class="form-control" id="unit" name="unit" placeholder="商品單位"
+								value="<%out.print(p.getProductUnit());%>">
 						</div>
 					</div>
 					<!-- -------------------------------------------------------------------------------------- -->
 					<div class="col-xs-6">
 						<div class="form-group">
-							<label for="capacity" class="col-sm-2 control-label">商品容量：</label>
-							<div class="col-sm-10">
-								<input type="text" class="form-control" id="capacity"
-									name="capacity" placeholder="商品容量"
-									value="<%out.print(p.getCapacity());%>">
-							</div>
+							<label for="capacity">商品容量：</label> <input type="text"
+								class="form-control" id="capacity" name="capacity"
+								placeholder="商品容量" value="<%out.print(p.getCapacity());%>">
 						</div>
 						<p />
 						<div class="form-group">
-							<label for="price" class="col-sm-2 control-label">商品單價：</label>
-							<div class="col-sm-10">
-								<input type="text" class="form-control" id="price" name="price"
-									placeholder="商品單價" value="<%out.print(p.getUnitPrice());%>">
-							</div>
+							<label for="price">商品單價：</label> <input type="text"
+								class="form-control" id="price" name="price" placeholder="商品單價"
+								value="<%out.print(p.getUnitPrice());%>">
 						</div>
 
 						<div class="form-group">
-							<label for="discon" class="col-sm-2 control-label">商品下架：</label>
-							<div class="col-sm-10">
-								<input type="text" class="form-control" id="discon"
-									name="discon" placeholder="商品下架"
-									value="<%out.print(p.getDiscontinued());%>">
-							</div>
+							<label for="discon">商品下架：</label> <input type="text"
+								class="form-control" id="discon" name="discon"
+								placeholder="商品下架" value="<%out.print(p.getDiscontinued());%>">
 						</div>
 
 						<div class="form-group">
-							<label for="descri" class="col-sm-2 control-label">商品資訊：</label>
-							<div class="col-sm-10">
-								<input type="text" class="form-control" id="descri"
-									name="descri" placeholder="商品資訊"
-									value="<%out.print(p.getDescription());%>">
-							</div>
+							<label for="descri">商品資訊：</label> <input type="text"
+								class="form-control" id="descri" name="descri"
+								placeholder="商品資訊" value="<%out.print(p.getDescription());%>">
+
 						</div>
 					</div>
 					<!-- -------------------------------------------------------------------------------------- -->

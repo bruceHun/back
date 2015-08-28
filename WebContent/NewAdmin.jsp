@@ -16,13 +16,14 @@
 
 <script language="javascript">
 	function getData() {
+		var t1 = document.getElementById("t1");
 		var request = new XMLHttpRequest();
-		request.open("GET", "AdminChk.jsp", false);
+		request.open("GET", "AdDupChk.jsp?=account" + t1.value, false);
 		// 這行是設定 request 要去哪取資料，尚未開始取
 		// 第三個參數打 true 可以想成，利用另外一個執行緒處理 Request
 		// 第三個參數打 false 可以想成，利用這一個執行緒處理 Request
 		request.send(null); // 發動 request 去取資料
-		document.getElementById("msg").innerHTML = request.responseText;
+		document.getElementById("dup").innerHTML = request.responseText;
 	}
 </script>
 
@@ -51,6 +52,13 @@ function check_data()
    if(t3.value=='')
    {
       message = message + '密碼確認不能為空白\n';
+      flag = false;
+   }
+   
+   var dup = document.getElementById('dup');
+   if(dup.value=='1')
+   {
+      message = message + '帳號不得重複\n';
       flag = false;
    }
 
@@ -84,7 +92,8 @@ function check_data()
 					<div class="form-group">
 						<label for="account">帳號</label> <input
 							type="text" class="form-control" id="t1" name="t1"
-							placeholder="請輸入帳號">
+							placeholder="請輸入帳號" onblur="getData()">
+							<input type="hidden" id="dup" value="1" />
 					</div>
 					<div class="form-group">
 						<label for="exampleInputPassword1">密碼</label> <input
@@ -109,13 +118,12 @@ function check_data()
 				<div class="col-xs-12">
 				<br/><br/><br/>
 				</div>
-			</div>
-			
-			<div class="panel-footer text-center">
-				<p>Copyright (c) 2015 版權聲明</p>
-			</div>
-			
+			</div>			
 		</div>
+		<div id="footer">
+			<jsp:include page="footer.jsp" />
+		</div>
+		
 	</div>
 </body>
 </html>

@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>管理系統首頁</title>
 <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" href="bootstrap/css/bootstrap-theme.min.css">
 <link rel="stylesheet"
@@ -65,9 +65,11 @@
 			</div>
 
 
-			<div class="panel-footer text-center">
-				<p>Copyright (c) 2015 版權聲明</p>
-			</div>
+			
+		</div>
+
+		<div id="footer">
+			<jsp:include page="footer.jsp" />
 		</div>
 
 	</div>

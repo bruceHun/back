@@ -30,21 +30,20 @@
 					<ul class="dropdown-menu" role="menu">
 						<li><a href="#">登入系統</a></li>
 						<li><a href="NewAdmin.jsp">註冊帳號</a></li>
+						<li><a href="NewAdmin.jsp">帳號管理</a></li>
 					</ul></li>
 				<li><a href="#">功能項目</a></li>
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown">會員管理<span class="caret"></span></a>
 					<ul class="dropdown-menu" role="menu">
-						<li><a href="#">會員資格</a></li>
-						<li><a href="#">會員等級</a></li>
-						<li><a href="#">會員資訊</a></li>
+						<li><a href="#">會員資運</a></li>
+						<li><a href="#">客戶資訊</a></li>
 					</ul></li>
 
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown">商品管理<span class="caret"></span></a>
 					<ul class="dropdown-menu" role="menu">
 						<li><a href="#">新增商品</a></li>
-						<li><a href="#">商品下架</a></li>
 						<li><a href="productlist.jsp">資料維護</a></li>
 					</ul></li>
 
