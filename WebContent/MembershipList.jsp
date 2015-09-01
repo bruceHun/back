@@ -10,7 +10,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>商品列表</title>
+<title>會員列表</title>
 <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" href="bootstrap/css/bootstrap-theme.min.css">
 <link rel="stylesheet"
@@ -44,45 +44,47 @@
 
 				final int PAGE_SIZE = 5;
 				int start_loc = (pg - 1) * PAGE_SIZE + 1;
-				ProductDAO pd = new ProductDAOimpl();
-				ArrayList<Product> list = pd.getRange(start_loc, PAGE_SIZE);
-				int TotalRows = pd.getSize();
+				MembershipDAO md = new MembershipDAOimpl();
+				CustomerDAO cd = new CustomerDAOimpl();
+				
+				
+				ArrayList<Membership> list = md.getRange(start_loc, PAGE_SIZE);
+				int TotalRows = md.getSize();
 				int TotalPages = (int) Math.ceil((double) TotalRows / (double) PAGE_SIZE);
+				Membership m = null;
+				Customer c = null;
 			%>
 
 			<div class="container">
+				<p/>
 				<div class="table-responsive">
 					<table class="table table-bordered table-hover">
 						<tr>
-							<th width="75" class="text-info">產品編號</th>
-							<th width="75" class="text-info">國碼</th>
-							<th width="75" class="text-info">類別編號</th>
-							<th width="110" class="text-info">產品名稱</th>
-							<th width="75" class="text-info">單位</th>
-							<th width="75" class="text-info">容量</th>
-							<th width="75" class="text-info">單價</th>
-							<th width="75" class="text-info">產品下架</th>
-							<th class="text-info">產品資訊</th>
+							<th width="75" class="text-info">客戶編號</th>
+							<th width="75" class="text-info">客戶姓名</th>
+							<th width="75" class="text-info">帳號</th>
+							<th width="75" class="text-info">密碼</th>
+							<th width="75" class="text-info">會員狀態</th>
 							<th class="text-info">編輯</th>
 							<th class="text-info">刪除</th>
 						</tr>
 						<%
-							for (Product p : list) {
+							//for (Membership m : list) {
+							for (int i = 0; i<TotalRows; i++) {
+								int index = list.get(i).getCustomerID();
+								c = cd.searchbyID(index);
 						%>
 						<tr>
-							<td><%=p.getProductID()%></td>
-							<td><%=p.getBarcode()%></td>
-							<td><%=p.getCategoryID()%></td>
-							<td><%=p.getProductName()%></td>
-							<td><%=p.getProductUnit()%></td>
-							<td><%=p.getCapacity()%></td>
-							<td><%=p.getUnitPrice()%></td>
-							<td><%=p.getDiscontinued()%></td>
-							<td><%=p.getDescription()%></td>
-							<td><a href="ProductEdit.jsp?id=<%=p.getProductID()%>">
+							<td><%=index%></td>
+							<td><%=c.getCustomerName() %></td>
+							<td><%=list.get(i).getAccount()%></td>
+							<td><%=list.get(i).getPassword()%></td>
+							<td><%=list.get(i).getMembership()%></td>
+							
+							<td><a href="ProductEdit.jsp?id=<%=index%>">
 									<button type="button" class="btn btn-primary btn-sm">編輯</button>
 							</a></td>
-							<td><a href="ProductDelCode.jsp?id=<%=p.getProductID()%>"
+							<td><a href="ProductDelCode.jsp?id=<%=index%>"
 								onclick="return confirm('確認刪除');">
 									<button type="button" class="btn btn-danger btn-sm">刪除</button>
 							</a></td>
@@ -138,58 +140,7 @@
 					</div>
 					<div class="col-xs-4"></div>
 				</div>
-				<!-- --------------------------------------------------------------------------------- -->
-				<p/>
-				<p/>
 				
-				<div class="col-xs-2">
-					<form id="page2" name="page2" action="productlist.jsp" method="get">
-						<select class="form-control" name="p" onchange="page2.submit()">
-							<%
-								for (i = 1; i <= TotalPages; i++) {
-							%>
-							<option value="<%=i%>" <%if (pg == i) {%> selected="selected"
-								<%}%>>第
-								<%=i%> 頁
-							</option>
-							<%
-								}
-							%>
-
-						</select>
-					</form>
-				</div>
-				
-
-				<div>
-				
-					<%
-						if (pg > 1) {
-					%>
-					  
-					  <ul class="pager">
-					    <li><a href="productlist.jsp?p=<%=(pg - 1)%>">上一頁</a></li>
-					<%
-						}
-					%>
-					<%
-						if (pg < TotalPages) {
-					%>
-					    <li><a href="productlist.jsp?p=<%=(pg + 1)%>">下一頁</a></li>
-					  </ul>
-					
-					<%
-						}
-					%>
-				</div>
-
-				<div>
-					<form name="page1" action="productlist.jsp" method="get">
-						<input type="number" name="p" size="3" /> <input type="submit"
-							value="GO" />
-					</form>
-				</div>
-
 				<!-- --------------------------------------------------------------------------------- -->
 
 			</div>

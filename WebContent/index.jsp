@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" %>
+	<% String s = (String)session.getAttribute("LogOK"); %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -17,7 +18,7 @@
 <body>
 	<div id="wrqpper">
 
-		<div id="header">
+		<div id="header_menu">
 			<jsp:include page="header.jsp" />
 		</div>
 		<div id="content">
@@ -27,7 +28,11 @@
 					<h1>管理系統</h1>
 					<p>訊息文字。</p>
 					<p>
-						<a class="btn btn-success btn-lg" role="button">登入</a>
+					<% if(s == null){ %>				
+						<a class="btn btn-success btn-lg" role="button" onclick="location.href = 'login.jsp'">登入</a>
+						<% }if(s != null) { %>
+						<a class="btn btn-danger btn-lg" role="button" onclick="location.href = 'logout.jsp'">登出</a>
+						<% } %>
 					</p>
 				</div>
 				<br />

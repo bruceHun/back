@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     import="shopping.DAO.*,shopping.Class.*, java.util.*"%>
+    <%
+	if(session.getAttribute("login")==null){
+		response.sendRedirect("login.jsp");
+	}
+%>
 
 <%
 Product p = new Product(

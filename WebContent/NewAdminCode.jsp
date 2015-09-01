@@ -1,12 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+    pageEncoding="UTF-8"
+    import="shopping.DAO.*,shopping.Class.*, java.util.*"%>
+<%
+String s = request.getParameter("account");
+Administrator ad = new Administrator(s, request.getParameter("password"),"1");
+AdministratorDAO dao = new AdministratorDAOimpl();
+dao.add(ad);
+session.setAttribute("LogOK", "yes");
+session.setAttribute("acc", s);
+response.sendRedirect("index.jsp");
+%>    
 
-</body>
-</html>
+

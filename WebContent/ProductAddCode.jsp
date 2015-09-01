@@ -19,6 +19,6 @@ Product p = new Product(Integer.valueOf(request.getParameter("productid")),
 		Byte.valueOf(request.getParameter("discon")),
 		request.getParameter("descri"));
 ProductDAO dao = new ProductDAOimpl();
-dao.update(p);
+dao.add(p);
 response.sendRedirect("productlist.jsp");
 %> 

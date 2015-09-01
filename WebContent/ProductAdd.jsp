@@ -1,10 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"
+	import="shopping.DAO.*,shopping.Class.*, java.util.*"%>
+	<%
+	if(session.getAttribute("LogOK")==null){
+		response.sendRedirect("login.jsp");
+	}
+	%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>新增管理帳號</title>
+<title>新增資料修改</title>
 
 <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" href="bootstrap/css/bootstrap-theme.min.css">
@@ -22,8 +28,8 @@
 		// 這行是設定 request 要去哪取資料，尚未開始取
 		// 第三個參數打 true 可以想成，利用另外一個執行緒處理 Request
 		// 第三個參數打 false 可以想成，利用這一個執行緒處理 Request
-		var img1 = document.getElementById("img1");
-		img1.src = "images/loading.gif";
+		//var img1 = document.getElementById("img1");
+		//img1.src = "images/loading.gif";
 
 		request.onreadystatechange = updateData;
 		// 當記憶體中的瀏覽器狀態改變時，呼叫 updateData 這個 function
@@ -36,18 +42,18 @@
 			var dup = document.getElementById("dup");
 			dup.value = request.responseText.trim();
 			//alert(dup.value);
-			if (dup.value == "1") {
+			/*if (dup.value == "1") {
 				var img1 = document.getElementById("img1");
 				img1.src = "images/wrong.gif";
 			} else {
 				var img1 = document.getElementById("img1");
 				img1.src = "images/check.gif";
-			}
+			}*/
 
 		}
 	}
 	
-	function check_pwd() {
+	/*function check_pwd() {
 		var t2 = document.getElementById("t2");	
 		var pattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,8}$/;
 		var ret = pattern.test(t2.value);
@@ -69,7 +75,7 @@
 		}else{
 			img3.src = "images/wrong.gif";
 		}
-	}
+	}*/
 
 	function check_data() {
 		var flag = true;
@@ -132,81 +138,77 @@
 			<jsp:include page="header.jsp" />
 		</div>
 		<div id="content">
+
 			<div class="container">
+				<form class="form-horizontal" name="product"
+					action="ProductAddCode.jsp" method="post">
+					
 
+					<!-- -------------------------------------------------------------------------------------- -->
+					<div class="col-xs-6">
+						<div class="form-group ">
+							<label for="barcode">國碼：</label> <input type="text"
+								class="form-control" id="barcode" name="barcode"
+								placeholder="國碼">
+						</div>
 
-				<div class="col-sm-offset-3 col-sm-6 col-md-offset-4 col-md-4">
-					<br /> <br /> <br />
-
-					<form class="form-horizontal" name="admin"
-						action="NewAdminCode.jsp" method="post"
-						onSubmit="return check_data()">
 						<div class="form-group">
-							<div class="col-sm-3">
-								<label for="t1">帳號</label>
-							</div>
-							<div class="col-sm-7">
-								<input type="text" class="form-control" id="t1" name="account"
-									placeholder="請輸入帳號" onchange="getData()">
-							</div>
-							<div class="col-sm-2">
-								<img src="images/trans.gif" id="img1" width="30px" height="30px" />
+							<label for="categoryid">類別編號：</label> <input type="text"
+								class="form-control" id="categoryid" name="categoryid"
+								placeholder="類別編號">
+						</div>
+
+						<div class="form-group">
+							<label for="pname">商品名稱：</label> <input type="text"
+								class="form-control" id="pname" name="pname" placeholder="商品名稱">
 								<input type="hidden" id="dup" value="1" />
-							</div>
 						</div>
 
 						<div class="form-group">
-							<div class="col-sm-3">
-								<label for="t2">密碼</label>
-							</div>
-							<div class="col-sm-7">
-								<input type="password" class="form-control" id="t2" name="password"
-									placeholder="請輸入密碼"  onchange="check_pwd()">
-							</div>
-							<div class="col-sm-2">
-								<img src="images/trans.gif" id="img2" width="30px" height="30px" />
-							</div>
+							<label for="unit">商品單位：</label> <input type="text"
+								class="form-control" id="unit" name="unit" placeholder="商品單位">
 						</div>
-						<div class="form-group">
-							<div class="col-sm-3">
-								<label for="t3">密碼確認</label>
-							</div>
-							<div class="col-sm-7">
-								<input type="password" class="form-control" id="t3" name="pwd2"
-									placeholder="請輸入密碼" onchange="check_pwd2()">
-							</div>
-							<div class="col-sm-2">
-								<img src="images/trans.gif" id="img3" width="30px" height="30px" />
-							</div>
-						</div>
-						
-						
-
-						<div class="form-group">
-							<div class="col-sm-offset-3 col-sm-7">
-								<div class="checkbox">
-									<label> <input type="checkbox" id="read"> 我已閱讀使用條款
-									</label>
-								</div>
-							</div>
-						</div>
-						<div class="form-group">
-							<div class="col-sm-offset-3 col-sm-7">
-								<button type="submit" class="btn btn-default">確認送出</button>
-							</div>
-						</div>
-					</form>
-
-
-					<div class="col-xs-12">
-						<br /> <br /> <br />
 					</div>
-				</div>
-			</div>
-			<div id="footer">
-				<jsp:include page="footer.jsp" />
+					<!-- -------------------------------------------------------------------------------------- -->
+					<div class="col-xs-6">
+						<div class="form-group">
+							<label for="capacity">商品容量：</label> <input type="text"
+								class="form-control" id="capacity" name="capacity"
+								placeholder="商品容量">
+						</div>
+						<p />
+						<div class="form-group">
+							<label for="price">商品單價：</label> <input type="text"
+								class="form-control" id="price" name="price" placeholder="商品單價">
+						</div>
+
+						<div class="form-group">
+							<label for="discon">商品下架：</label> <input type="text"
+								class="form-control" id="discon" name="discon"
+								placeholder="商品下架">
+						</div>
+
+						<div class="form-group">
+							<label for="descri">商品資訊：</label> <input type="text"
+								class="form-control" id="descri" name="descri"
+								placeholder="商品資訊">
+
+						</div>
+					</div>
+					<!-- -------------------------------------------------------------------------------------- -->
+
+					<div class="form-group">
+						<div class="col-sm-offset-2 col-sm-10">
+							<button type="submit" class="btn btn-default">確認新增</button>
+						</div>
+					</div>
+
+				</form>
 			</div>
 
+		</div>
+		<div>
+			<jsp:include page="footer.jsp" />
 		</div>
 
 	</div>
