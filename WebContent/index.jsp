@@ -21,7 +21,7 @@
 		<div id="header_menu">
 			<jsp:include page="header.jsp" />
 		</div>
-		<div id="content">
+		<div id="index">
 			<div class="container">
 
 				<div class="jumbotron">

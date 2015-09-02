@@ -35,8 +35,8 @@ if(!p5.equals("")){
 	ip5 = Integer.valueOf(p5);
 }
 	
-request.setCharacterEncoding("UTF-8");
-GiftSet gs = new GiftSet(null,request.getParameter("gsname"),
+String gsname = new String(request.getParameter("gsname").getBytes("ISO-8859-1"),"utf-8");
+GiftSet gs = new GiftSet(null,gsname,
 		ip1,
 		ip2,
 		ip3,
@@ -47,5 +47,5 @@ GiftSet gs = new GiftSet(null,request.getParameter("gsname"),
 GiftSetDAO dao = new GiftSetDAOimpl();
 System.out.print(gs);
 dao.add(gs);
-response.sendRedirect("index.jsp");
+response.sendRedirect("GiftSetList.jsp");
 %> 

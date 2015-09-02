@@ -55,6 +55,12 @@
 			<jsp:include page="header.jsp" />
 		</div>
 		<div id="content">
+			<div class="page-header">
+				<h1 align="center">
+					登入系統 
+				</h1>
+			</div>
+			
 			<div class="container">
 
 				<% if(s==null) { %>

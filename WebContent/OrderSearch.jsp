@@ -1,16 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"
 	import="shopping.DAO.*,shopping.Class.*, java.util.*"%>
-	<%
-	if(session.getAttribute("LogOK")==null){
+<%
+	if (session.getAttribute("LogOK") == null) {
 		response.sendRedirect("login.jsp");
 	}
-	%>
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>顧客列表</title>
+<title>訂單查詢</title>
 <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" href="bootstrap/css/bootstrap-theme.min.css">
 <link rel="stylesheet"
@@ -29,7 +29,7 @@
 		<div id="content">
 			<div class="page-header">
 				<h1 align="center">
-					會員管理 <small>顧客資訊</small>
+					訂單管理 <small>訂單查詢</small>
 				</h1>
 			</div>
 
@@ -47,54 +47,80 @@
 
 				}
 
+				ProductDAO pd = new ProductDAOimpl();
+
 				final int PAGE_SIZE = 5;
 				int start_loc = (pg - 1) * PAGE_SIZE + 1;
-				CustomerDAO cd = new CustomerDAOimpl();
-				
-				ArrayList<Customer> list = cd.getRange(start_loc, PAGE_SIZE);
-				int TotalRows = cd.getSize();
+				GiftSetDAO gd = new GiftSetDAOimpl();
+
+				ArrayList<GiftSet> list = gd.getRange(start_loc, PAGE_SIZE);
+				int TotalRows = gd.getSize();
 				int TotalPages = (int) Math.ceil((double) TotalRows / (double) PAGE_SIZE);
 			%>
 
 			<div class="container">
-				<p/>
+				<p />
 				<div class="table-responsive">
-					<table class="table table-bordered">
+					<table class="table table-bordered table-hover">
 						<tr>
-							<th width="50" class="text-info">客戶編號</th>
-							<th width="75" class="text-info">客戶姓名</th>
-							<th width="90" class="text-info">身分證字號</th>
-							<th width="50" class="text-info">性別</th>
-							<th width="100" class="text-info">生日</th>
-							<th width="90" class="text-info">室內電話</th>
-							<th width="90" class="text-info">行動電話</th>
-							<th width="200" class="text-info">地址</th>
-							<th width="150" class="text-info">E-mail</th>
-							<th width="50" class="text-info">會員等級</th>
-							<th width="50" class="text-info">折扣編號</th>
-							<th class="text-info">編輯</th>
-							<th class="text-info">刪除</th>
+							<th width="50" class="text-info">禮盒編號</th>
+							<th width="130" class="text-info">禮盒名稱</th>
+							<th width="150" class="text-info">產品ㄧ</th>
+							<th width="150" class="text-info">產品二</th>
+							<th width="150" class="text-info">產品三</th>
+							<th width="150" class="text-info">產品四</th>
+							<th width="150" class="text-info">產品五</th>
+							<th width="60" class="text-info">單價</th>
+							<th width="60" class="text-info">產品下架</th>
+							<th width="50" class="text-info">編輯</th>
+							<th width="50" class="text-info">刪除</th>
 						</tr>
 						<%
-							for (Customer c : list) {
+							for (GiftSet g : list) {
+								String id1 = null;
+								String id2 = null;
+								String id3 = null;
+								String id4 = null;
+								String id5 = null;
+								if (g.getID1() != 0) {
+									id1 = pd.searchbyID(g.getID1()).getProductName()+"--"+pd.searchbyID(g.getID1()).getCapacity();
+								}
+								if (g.getID2() != 0) {
+									id2 = pd.searchbyID(g.getID2()).getProductName()+"--"+pd.searchbyID(g.getID2()).getCapacity();;
+								}
+								if (g.getID3() != 0) {
+									id3 = pd.searchbyID(g.getID3()).getProductName()+"--"+pd.searchbyID(g.getID3()).getCapacity();;
+								}
+								if (g.getID4() != 0) {
+									id4 = pd.searchbyID(g.getID4()).getProductName()+"--"+pd.searchbyID(g.getID4()).getCapacity();;
+								}
+								if (g.getID5() != 0) {
+									id5 = pd.searchbyID(g.getID5()).getProductName()+"--"+pd.searchbyID(g.getID5()).getCapacity();;
+								}
 						%>
 						<tr>
-							<td><%=c.getCustomerID()%></td>
-							<td><%=c.getCustomerName()%></td>
-							<td><%=c.getPersonalID()%></td>
-							<td><% if(c.getGender()==1){out.print("男");}else{out.print("女");} %></td>
-							<td><%=c.getBirthDate() %></td>
-							<td><%=c.getPhone() %></td>
-							<td><%=c.getCelPhone() %></td>
-							<td><%=c.getAddress() %></td>
-							<td><%=c.getEmail() %></td>
-							<td><%=c.getCustomerType() %></td>
-							<td><%=c.getDiscountID() %></td>
-							
-							<td><a href="ProductEdit.jsp?id=<%=c.getCustomerID()%>">
+							<td><%=g.getGiftSetID()%></td>
+							<td><%=g.getGiftSetName()%></td>
+							<td><%=id1%></td>
+							<td><%=id2%></td>
+							<td><%=id3%></td>
+							<td><%=id4%></td>
+							<td><%=id5%></td>
+							<td><%=g.getUnitPrice()%></td>
+							<td>
+								<%
+									if (g.getDiscontinued() == 1) {
+											out.print("下架");
+										} else {
+											out.print("未下架");
+										}
+								%>
+							</td>
+
+							<td><a href="ProductEdit.jsp?id=<%=g.getGiftSetID()%>">
 									<button type="button" class="btn btn-primary btn-sm">編輯</button>
 							</a></td>
-							<td><a href="ProductDelCode.jsp?id=<%=c.getCustomerID()%>"
+							<td><a href="ProductDelCode.jsp?id=<%=g.getGiftSetID()%>"
 								onclick="return confirm('確認刪除');">
 									<button type="button" class="btn btn-danger btn-sm">刪除</button>
 							</a></td>
@@ -126,19 +152,19 @@
 							<%
 								if (end_num < start_num) {
 							%>
-							<li><a href="productlist.jsp?p=<%=i%>">Prev <%=PAGE_RANGE%>
+							<li><a href="GiftSetList.jsp?p=<%=i%>">Prev <%=PAGE_RANGE%>
 									Pages <span aria-hidden="true">&laquo;</span>
 							</a></li>
 							<%
 								}
 							%>
 
-							<li><a href="productlist.jsp?p=<%=i%>"><%=i%></a></li>
+							<li><a href="GiftSetList.jsp?p=<%=i%>"><%=i%></a></li>
 							<%
 								}
 								if (TotalPages > end_num) {
 							%>
-							<li><a href="productlist.jsp?p=<%=i%>">Next <%=PAGE_RANGE%>
+							<li><a href="GiftSetList.jsp?p=<%=i%>">Next <%=PAGE_RANGE%>
 									Pages <span aria-hidden="true">&raquo;</span>
 							</a></li>
 							<%
@@ -148,19 +174,20 @@
 						</ul>
 						</nav>
 					</div>
+					<div class="col-xs-4"></div>
 				</div>
-				
+
 				<!-- --------------------------------------------------------------------------------- -->
 
 			</div>
 
 
 		</div>
-		
+
 		<div id="footer">
 			<jsp:include page="footer.jsp" />
 		</div>
-		
+
 	</div>
 </body>
 </html>

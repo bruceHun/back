@@ -32,7 +32,7 @@
 		final int PAGE_SIZE = 3;
 		int start_loc = (pg - 1) * PAGE_SIZE + 1;
 		ProductDAO pd = new ProductDAOimpl();
-		ArrayList<Product> list = pd.gerRange(start_loc, PAGE_SIZE);
+		ArrayList<Product> list = pd.getRange(start_loc, PAGE_SIZE);
 		int TotalRows = pd.getSize();
 		int TotalPages = (int) Math.ceil((double) TotalRows / (double) PAGE_SIZE);
 	%>

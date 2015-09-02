@@ -27,6 +27,11 @@
 			<jsp:include page="header.jsp" />
 		</div>
 		<div id="content">
+			<div class="page-header">
+				<h1 align="center">
+					進出貨管理 <small>檢視庫存</small>
+				</h1>
+			</div>
 
 			<%
 				String Page = request.getParameter("p");

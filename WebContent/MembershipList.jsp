@@ -27,6 +27,11 @@
 			<jsp:include page="header.jsp" />
 		</div>
 		<div id="content">
+			<div class="page-header">
+				<h1 align="center">
+					會員管理 <small>客戶資訊</small>
+				</h1>
+			</div>
 
 			<%
 				String Page = request.getParameter("p");
@@ -58,7 +63,7 @@
 			<div class="container">
 				<p/>
 				<div class="table-responsive">
-					<table class="table table-bordered table-hover">
+					<table class="table table-bordered">
 						<tr>
 							<th width="75" class="text-info">客戶編號</th>
 							<th width="75" class="text-info">客戶姓名</th>
@@ -138,7 +143,6 @@
 						</ul>
 						</nav>
 					</div>
-					<div class="col-xs-4"></div>
 				</div>
 				
 				<!-- --------------------------------------------------------------------------------- -->

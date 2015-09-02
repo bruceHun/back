@@ -51,7 +51,6 @@
 						<li><a href="NewAdmin.jsp">註冊帳號</a></li>
 						<li><a href="NewAdmin.jsp">帳號管理</a></li>
 					</ul></li>
-				<li><a href="#">功能項目</a></li>
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown">會員管理<span class="caret"></span></a>
 					<ul class="dropdown-menu" role="menu">
@@ -64,7 +63,9 @@
 					<ul class="dropdown-menu" role="menu">
 						<li><a href="ProductAdd.jsp">新增商品</a></li>
 						<li><a href="GiftSetAdd.jsp">新增商品組合</a></li>
-						<li><a href="productlist.jsp">資料維護</a></li>
+						<li class="divider"></li>
+						<li><a href="productlist.jsp">商品資料維護</a></li>
+						<li><a href="GiftSetList.jsp">組合資料維護</a></li>
 					</ul></li>
 
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
@@ -75,6 +76,13 @@
 						<li><a href="#">退貨</a></li>
 						<li class="divider"></li>
 						<li><a href="InventoryList.jsp">檢視庫存</a></li>
+					</ul></li>
+					
+				<li class="dropdown"><a href="#" class="dropdown-toggle"
+					data-toggle="dropdown">訂單管理<span class="caret"></span></a>
+					<ul class="dropdown-menu" role="menu">
+						<li><a href="#">訂單查詢</a></li>
+						<li><a href="#">訂單處理</a></li>
 					</ul></li>
 
 			</ul>

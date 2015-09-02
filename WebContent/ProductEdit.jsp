@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"
 	import="shopping.DAO.*,shopping.Class.*, java.util.*"%>
-	<%
-	if(session.getAttribute("LogOK")==null){
+<%
+	if (session.getAttribute("LogOK") == null) {
 		response.sendRedirect("login.jsp");
 	}
-	%>
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -30,7 +30,9 @@
 		<div id="content">
 
 			<%
-				request.setCharacterEncoding("UTF-8");
+				ProductCategoryDAO pcd = new ProductCategoryDAOimpl();
+				ArrayList<ProductCategory> list = pcd.showAll();
+
 				String s = request.getParameter("id");
 				Product p = null;
 				if (s != null) {
@@ -47,25 +49,42 @@
 				}
 			%>
 
+			<div class="page-header">
+				<h1 align="center">
+					商品管理 <small>產品資料修改</small>
+				</h1>
+			</div>
 
 			<div class="container">
+				<br />
+				<br />
+				<br />
 				<form class="form-horizontal" name="product"
 					action="ProductEditCode.jsp" method="post">
 					<input type="hidden" name=productid
 						value="<%out.print(p.getProductID());%>" />
 
 					<!-- -------------------------------------------------------------------------------------- -->
-					<div class="col-xs-6">
+					<div class="col-sm-offset-2 col-sm-3">
 						<div class="form-group ">
+							<input type="hidden" id="pid" name="pid" value="<%=p.getProductID() %>">
 							<label for="barcode">國碼：</label> <input type="text"
 								class="form-control" id="barcode" name="barcode"
 								placeholder="國碼" value="<%out.print(p.getBarcode());%>">
 						</div>
 
 						<div class="form-group">
-							<label for="categoryid">類別編號：</label> <input type="text"
-								class="form-control" id="categoryid" name="categoryid"
-								placeholder="類別編號" value="<%out.print(p.getCategoryID());%>">
+							<label for="categoryid">產品類別：</label> <select
+								class="form-control" id="categoryid" name="categoryid">
+								<option value=<%=p.getCategoryID()%> Selected>未修改--<%=pcd.searchbyID(p.getCategoryID()).getCategoryName()%></option>
+								<%
+									for (ProductCategory pc : list) {
+								%>
+								<option value=<%=pc.getCategoryID()%>><%=pc.getCategoryID()%>.<%=pc.getCategoryName()%></option>
+								<%
+									}
+								%>
+							</select>
 						</div>
 
 						<div class="form-group">
@@ -81,7 +100,7 @@
 						</div>
 					</div>
 					<!-- -------------------------------------------------------------------------------------- -->
-					<div class="col-xs-6">
+					<div class="col-sm-offset-2 col-sm-3">
 						<div class="form-group">
 							<label for="capacity">商品容量：</label> <input type="text"
 								class="form-control" id="capacity" name="capacity"
@@ -95,27 +114,42 @@
 						</div>
 
 						<div class="form-group">
-							<label for="discon">商品下架：</label> <input type="text"
-								class="form-control" id="discon" name="discon"
-								placeholder="商品下架" value="<%out.print(p.getDiscontinued());%>">
+							<label for="discon">商品下架：</label> <select class="form-control"
+								id="discon" name="discon">
+								<option value=<%=p.getDiscontinued()%> Selected>未修改--<%
+									if (p.getDiscontinued() == 1) {
+										out.print("下架");
+									} else {
+										out.print("未下架");
+									}
+								%>
+								</option>
+								<option value="0">未下架</option>
+								<option value="1">下架</option>
+							</select>
 						</div>
 
 						<div class="form-group">
-							<label for="descri">商品資訊：</label> <input type="text"
-								class="form-control" id="descri" name="descri"
-								placeholder="商品資訊" value="<%out.print(p.getDescription());%>">
-
+							<label for="descri">商品資訊：</label>
+							<textarea class="form-control" rows="5" id="descri" name="descri"
+								placeholder="商品資訊">
+								<%
+									out.print(p.getDescription());
+								%>
+								</textarea>
 						</div>
 					</div>
 					<!-- -------------------------------------------------------------------------------------- -->
 
 					<div class="form-group">
-						<div class="col-sm-offset-2 col-sm-10">
+						<div class="col-sm-12" align="center">
 							<button type="submit" class="btn btn-default">確認修改</button>
 						</div>
 					</div>
 
 				</form>
+				<br />
+				<br />
 			</div>
 
 			<div class="panel-footer text-center">

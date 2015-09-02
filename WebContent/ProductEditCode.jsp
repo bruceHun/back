@@ -8,16 +8,21 @@
 %>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%
-request.setCharacterEncoding("UTF-8");
-Product p = new Product(Integer.valueOf(request.getParameter("productid")),
+String pname = new String(request.getParameter("pname").getBytes("ISO-8859-1"),"utf-8");
+String unit = new String(request.getParameter("unit").getBytes("ISO-8859-1"),"utf-8");
+String capacity = new String(request.getParameter("capacity").getBytes("ISO-8859-1"),"utf-8");
+String descri = new String(request.getParameter("descri").getBytes("ISO-8859-1"),"utf-8");
+
+Product p = new Product(Integer.valueOf(request.getParameter("pid")),
 		request.getParameter("barcode"),
 		Integer.valueOf(request.getParameter("categoryid")),
-		request.getParameter("pname"),
-		request.getParameter("unit"),
-		request.getParameter("capacity"),
+		pname,
+		unit,
+		capacity,
 		Float.valueOf(request.getParameter("price")),
 		Byte.valueOf(request.getParameter("discon")),
-		request.getParameter("descri"));
+		descri);
+System.out.print(p);
 ProductDAO dao = new ProductDAOimpl();
 dao.update(p);
 response.sendRedirect("productlist.jsp");
