@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	<% String s = (String)session.getAttribute("LogOK"); %>
+<%
+	String s = (String) session.getAttribute("LogOK");
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -42,8 +44,6 @@
 	function chech_Data() {
 		
 	}*/
-
-
 </script>
 
 </head>
@@ -57,19 +57,26 @@
 		<div id="content">
 			<div class="page-header">
 				<h1 align="center">
-					登入系統 
+					<%
+						if (s == null) {
+					%>登入系統<%
+						} else {
+					%>登出系統<%
+						}
+					%>
 				</h1>
 			</div>
-			
+
 			<div class="container">
 
-				<% if(s==null) { %>
+				<%
+					if (s == null) {
+				%>
 				<div class="col-sm-offset-3 col-sm-6 col-md-offset-4 col-md-4">
 					<p />
 
-					<form class="form-horizontal" name="admin"
-						action="loginChk.jsp" method="post"
-						onSubmit="return check_data()">
+					<form class="form-horizontal" name="admin" action="loginChk.jsp"
+						method="post" onSubmit="return check_data()">
 						<div class="form-group">
 							<div class="col-sm-3">
 								<label for="t1">帳號</label>
@@ -78,7 +85,7 @@
 								<input type="text" class="form-control" id="t1" name="account"
 									placeholder="請輸入帳號">
 							</div>
-							
+
 						</div>
 
 						<div class="form-group">
@@ -86,15 +93,15 @@
 								<label for="t2">密碼</label>
 							</div>
 							<div class="col-sm-7">
-								<input type="password" class="form-control" id="t2" name="password"
-									placeholder="請輸入密碼">
+								<input type="password" class="form-control" id="t2"
+									name="password" placeholder="請輸入密碼">
 							</div>
-							
+
 						</div>
 
 						<div class="form-group">
 							<div class="col-sm-offset-3 col-sm-7">
-							
+
 								<button type="submit" class="btn btn-default">登入</button>
 							</div>
 						</div>
@@ -105,14 +112,26 @@
 						<br /> <br /> <br />
 					</div>
 				</div>
-				<% } if (s!=null) { %>
-				<button type="button" class="btn btn-default" onclick="location.href='logout.jsp'" >登出</button>
-				<% } %>
-			</div>
-			<div id="footer">
-				<jsp:include page="footer.jsp" />
+				<%
+					}
+					if (s != null) {
+				%>
+				<div id="content">
+					<br/><br/><br/>
+					<div class="col-sm-12" align="center">
+						<button type="button" class="btn btn-default"
+							onclick="location.href='logout.jsp'">登出</button>
+					</div>
+				</div>
+				<%
+					}
+				%>
 			</div>
 
+
+		</div>
+		<div id="footer">
+			<jsp:include page="footer.jsp" />
 		</div>
 
 	</div>

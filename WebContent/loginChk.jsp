@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
-    import="shopping.DAO.*,shopping.Class.*, java.util.*"%>
+    import="shopping.Business.*,shopping.DAO.*,shopping.Class.*, java.util.*"%>
     
 <%
 String acc = request.getParameter("account");
-String pwd = request.getParameter("password");
+String pwd = SavePWD.encode(request.getParameter("password"));
     Administrator adm = null;
     int flag = 0;
     if (acc != null && pwd != null)

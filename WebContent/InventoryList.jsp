@@ -50,6 +50,7 @@
 				final int PAGE_SIZE = 5;
 				int start_loc = (pg - 1) * PAGE_SIZE + 1;
 				InventoryDAO id = new InventoryDAOimpl();
+				ProductDAO pd = new ProductDAOimpl();
 				
 				ArrayList<Inventory> list = id.getRange(start_loc, PAGE_SIZE);
 				int TotalRows = id.getSize();
@@ -59,13 +60,14 @@
 			<div class="container">
 				<p/>
 				<div class="table-responsive">
-					<table class="table table-bordered table-hover">
+					<table class="table table-bordered">
 						<tr>
 							<th width="75" class="text-info">庫存編號</th>
 							<th width="75" class="text-info">產品編號</th>
+							<th width="150" class="text-info">產品名稱及容量</th>
 							<th width="75" class="text-info">成本</th>
 							<th width="75" class="text-info">庫存量</th>
-							<th width="75" class="text-info">已訂未出</th>
+							<th width="75" class="text-info">待出貨</th>
 							<th width="75" class="text-info">安全存量</th>
 							<th class="text-info">編輯</th>
 							<th class="text-info">刪除</th>
@@ -76,6 +78,7 @@
 						<tr>
 							<td><%=i.getStockNumber()%></td>
 							<td><%=i.getProductID()%></td>
+							<td><%=pd.searchbyID(i.getProductID()).getProductName() %>--<%=pd.searchbyID(i.getProductID()).getCapacity() %></td>
 							<td><%=i.getCost()%></td>
 							<td><%=i.getUnitsInStock()%></td>
 							<td><%=i.getUnitsOnOrder()%></td>

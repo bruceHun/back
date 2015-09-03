@@ -46,27 +46,27 @@
 
 		}
 	}
-	
+
 	function check_pwd() {
-		var t2 = document.getElementById("t2");	
+		var t2 = document.getElementById("t2");
 		var pattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,8}$/;
 		var ret = pattern.test(t2.value);
-		if(ret){
+		if (ret) {
 			img2.src = "images/check.gif";
-		}else{
+		} else {
 			img2.src = "images/wrong.gif"
 		}
 
 	}
-	
+
 	function check_pwd2() {
 		var t2 = document.getElementById("t2");
 		var t3 = document.getElementById("t3");
 		var img2 = document.getElementById("img2");
 		var img3 = document.getElementById("img3");
-		if(t2.value == t3.value){
+		if (t2.value == t3.value) {
 			img3.src = "images/check.gif";
-		}else{
+		} else {
 			img3.src = "images/wrong.gif";
 		}
 	}
@@ -87,15 +87,15 @@
 			message = message + '密碼不能為空白\n';
 			flag = false;
 		}
-		
+
 		var t2 = document.getElementById('t2');
 		var pattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,8}$/;
 		var ret = pattern.test(t2.value);
-		if(!ret){
+		if (!ret) {
 			message = message + '密碼格式不符\n';
 			flag = false;
 		}
-		
+
 		// ---------- Check ----------
 		var t3 = document.getElementById('t3');
 		if (t3.value == '') {
@@ -108,8 +108,8 @@
 			message = message + '帳號不得重複\n';
 			flag = false;
 		}
-				
-		if (!document.getElementById('read').checked){
+
+		if (!document.getElementById('read').checked) {
 			message = message + '須先閱讀使用條款';
 			flag = false;
 		}
@@ -119,8 +119,6 @@
 		}
 		return flag;
 	}
-	
-
 </script>
 
 </head>
@@ -137,7 +135,7 @@
 					登入系統 <small>新增管理帳號</small>
 				</h1>
 			</div>
-		
+
 			<div class="container">
 
 
@@ -166,8 +164,8 @@
 								<label for="t2">密碼</label>
 							</div>
 							<div class="col-sm-7">
-								<input type="password" class="form-control" id="t2" name="password"
-									placeholder="請輸入密碼"  onchange="check_pwd()">
+								<input type="password" class="form-control" id="t2"
+									name="password" placeholder="請輸入密碼" onchange="check_pwd()">
 							</div>
 							<div class="col-sm-2">
 								<img src="images/trans.gif" id="img2" width="30px" height="30px" />
@@ -185,13 +183,14 @@
 								<img src="images/trans.gif" id="img3" width="30px" height="30px" />
 							</div>
 						</div>
-						
-						
+
+
 
 						<div class="form-group">
 							<div class="col-sm-offset-3 col-sm-7">
 								<div class="checkbox">
-									<label> <input type="checkbox" id="read"> 我已閱讀使用條款
+									<label> <input type="checkbox" id="read">
+										我已閱讀使用條款
 									</label>
 								</div>
 							</div>
@@ -209,11 +208,13 @@
 					</div>
 				</div>
 			</div>
-			<div id="footer">
-				<jsp:include page="footer.jsp" />
-			</div>
 
 		</div>
+
+		<div id="footer">
+			<jsp:include page="footer.jsp" />
+		</div>
+
 
 	</div>
 </body>

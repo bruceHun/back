@@ -67,26 +67,19 @@
 						<div class="form-group ">
 							<label for="gsname">禮盒名稱：</label> <input type="text"
 								class="form-control" id="gsname" name="gsname"
-								placeholder="禮盒名稱">
+								placeholder="禮盒名稱" value=<%=g.getGiftSetName() %>>
 						</div>
 
 						<div class="form-group">
 							<label for="product1">商品ㄧ：</label> <select class="form-control"
 								id="product1" name="product1">
-								<%
-									if (g.getID1() != 0) {
-								%>
-								<option value=<%=g.getID1()%>>--未修改--<%=pd.searchbyID(g.getID1()).getProductName()%></option>
-								<%
-									} else {
-								%><option value=-1>--請選擇--</option>
-								<%
-									}
-								%>
+								<option value=-1>--請選擇--</option>
 								<%
 									for (Product p : list) {
 								%>
-								<option value=<%=p.getProductID()%>><%=p.getProductID()%>.<%=p.getProductName()%>--<%=p.getCapacity()%></option>
+								<option value=<%=p.getProductID()%>
+									<%if (g.getID1() == p.getProductID()) {%> selected="selected"
+									<%}%>><%=p.getProductID()%>.<%=p.getProductName()%>--<%=p.getCapacity()%></option>
 								<%
 									}
 								%>
@@ -96,20 +89,13 @@
 						<div class="form-group">
 							<label for="product2">商品二：</label> <select class="form-control"
 								id="product2" name="product2">
-								<%
-									if (g.getID2() != 0) {
-								%>
-								<option value=<%=g.getID2()%>>--未修改--<%=pd.searchbyID(g.getID2()).getProductName()%></option>
-								<%
-									} else {
-								%><option value=-1>--請選擇--</option>
-								<%
-									}
-								%>
+								<option value=-1>--請選擇--</option>
 								<%
 									for (Product p : list) {
 								%>
-								<option value=<%=p.getProductID()%>><%=p.getProductID()%>.<%=p.getProductName()%>--<%=p.getCapacity()%></option>
+								<option value=<%=p.getProductID()%>
+									<%if (g.getID2() == p.getProductID()) {%> selected="selected"
+									<%}%>><%=p.getProductID()%>.<%=p.getProductName()%>--<%=p.getCapacity()%></option>
 								<%
 									}
 								%>
@@ -119,20 +105,13 @@
 						<div class="form-group">
 							<label for="uproduct3">商品三：</label> <select class="form-control"
 								id="product3" name="product3">
-								<%
-									if (g.getID3() != 0) {
-								%>
-								<option value=<%=g.getID3()%>>--未修改--<%=pd.searchbyID(g.getID3()).getProductName()%></option>
-								<%
-									} else {
-								%><option value=-1>--請選擇--</option>
-								<%
-									}
-								%>
+								<option value=-1>--請選擇--</option>
 								<%
 									for (Product p : list) {
 								%>
-								<option value=<%=p.getProductID()%>><%=p.getProductID()%>.<%=p.getProductName()%>--<%=p.getCapacity()%></option>
+								<option value=<%=p.getProductID()%>
+									<%if (g.getID3() == p.getProductID()) {%> selected="selected"
+									<%}%>><%=p.getProductID()%>.<%=p.getProductName()%>--<%=p.getCapacity()%></option>
 								<%
 									}
 								%>
@@ -144,20 +123,13 @@
 						<div class="form-group">
 							<label for="product4">商品四：</label> <select class="form-control"
 								id="product4" name="product4">
-								<%
-									if (g.getID4() != 0) {
-								%>
-								<option value=<%=g.getID4()%>>--未修改--<%=pd.searchbyID(g.getID4()).getProductName()%></option>
-								<%
-									} else {
-								%><option value=-1>--請選擇--</option>
-								<%
-									}
-								%>
+								<option value=-1>--請選擇--</option>
 								<%
 									for (Product p : list) {
 								%>
-								<option value=<%=p.getProductID()%>><%=p.getProductID()%>.<%=p.getProductName()%>--<%=p.getCapacity()%></option>
+								<option value=<%=p.getProductID()%>
+									<%if (g.getID4() == p.getProductID()) {%> selected="selected"
+									<%}%>><%=p.getProductID()%>.<%=p.getProductName()%>--<%=p.getCapacity()%></option>
 								<%
 									}
 								%>
@@ -167,20 +139,13 @@
 						<div class="form-group">
 							<label for="product5">商品五：</label> <select class="form-control"
 								id="product5" name="product5">
-								<%
-									if (g.getID5() != 0) {
-								%>
-								<option value=<%=g.getID5()%>>--未修改--<%=pd.searchbyID(g.getID5()).getProductName()%></option>
-								<%
-									} else {
-								%><option value=-1>--請選擇--</option>
-								<%
-									}
-								%>
+								<option value=-1>--請選擇--</option>
 								<%
 									for (Product p : list) {
 								%>
-								<option value=<%=p.getProductID()%>><%=p.getProductID()%>.<%=p.getProductName()%>--<%=p.getCapacity()%></option>
+								<option value=<%=p.getProductID()%>
+									<%if (g.getID5() == p.getProductID()) {%> selected="selected"
+									<%}%>><%=p.getProductID()%>.<%=p.getProductName()%>--<%=p.getCapacity()%></option>
 								<%
 									}
 								%>
@@ -189,12 +154,12 @@
 
 						<div class="form-group">
 							<label for="price">單價：</label> <input type="text"
-								class="form-control" id="price" name="price" placeholder="單價">
+								class="form-control" id="price" name="price" placeholder="單價" value=<%=g.getUnitPrice() %>>
 						</div>
 
 						<div class="form-group">
 							<label for="discon">商品下架：</label> <select class="form-control"
-								id="discon" name="discon">
+								id="discon" name="discon" value=<%=g.getDiscontinued() %>>
 								<option value="0">未下架</option>
 								<option value="1">下架</option>
 							</select>

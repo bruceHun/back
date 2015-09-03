@@ -8,40 +8,19 @@
 %>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%
-String p1 = request.getParameter("product1");
-Integer ip1 = -1;
-String p2 = request.getParameter("product2");
-Integer ip2 = -1;
-String p3 = request.getParameter("product3");
-Integer ip3 = -1;
-String p4 = request.getParameter("product4");
-Integer ip4 = -1;
-String p5 = request.getParameter("product5");
-Integer ip5 = -1;
-
-if(!p1.equals("")){
-	ip1 = Integer.valueOf(p1);
-}
-if(!p2.equals("")){
-	ip2 = Integer.valueOf(p2);
-}
-if(!p3.equals("")){
-	ip3 = Integer.valueOf(p3);
-}
-if(!p4.equals("")){
-	ip4 = Integer.valueOf(p4);
-}
-if(!p5.equals("")){
-	ip5 = Integer.valueOf(p5);
-}
+int p1 = Integer.valueOf(request.getParameter("product1"));
+int p2 = Integer.valueOf(request.getParameter("product2"));
+int p3 = Integer.valueOf(request.getParameter("product3"));
+int p4 = Integer.valueOf(request.getParameter("product4"));
+int p5 = Integer.valueOf(request.getParameter("product5"));
 	
 String gsname = new String(request.getParameter("gsname").getBytes("ISO-8859-1"),"utf-8");
 GiftSet gs = new GiftSet(null,gsname,
-		ip1,
-		ip2,
-		ip3,
-		ip4,
-		ip4,
+		p1,
+		p2,
+		p3,
+		p4,
+		p5,
 		Float.valueOf(request.getParameter("price")),
 		Byte.valueOf(request.getParameter("discon")));
 GiftSetDAO dao = new GiftSetDAOimpl();

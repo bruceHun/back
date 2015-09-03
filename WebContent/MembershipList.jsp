@@ -69,7 +69,7 @@
 							<th width="75" class="text-info">客戶姓名</th>
 							<th width="75" class="text-info">帳號</th>
 							<th width="75" class="text-info">密碼</th>
-							<th width="75" class="text-info">會員狀態</th>
+							<th width="100" class="text-info">會員狀態</th>
 							<th class="text-info">編輯</th>
 							<th class="text-info">刪除</th>
 						</tr>
@@ -84,7 +84,17 @@
 							<td><%=c.getCustomerName() %></td>
 							<td><%=list.get(i).getAccount()%></td>
 							<td><%=list.get(i).getPassword()%></td>
-							<td><%=list.get(i).getMembership()%></td>
+							<td>
+							<select
+								class="form-control" id="categoryid" name="categoryid">
+								<% int state = list.get(i).getMembership(); %>
+								<option value=<%=state %> Selected>--<% if(state ==1){out.print("正常");}else{out.print("停權");}%></option>
+								
+								<option value="1">正常</option>
+								<option value="0">停權</option>
+								
+							</select>
+							</td>
 							
 							<td><a href="ProductEdit.jsp?id=<%=index%>">
 									<button type="button" class="btn btn-primary btn-sm">編輯</button>

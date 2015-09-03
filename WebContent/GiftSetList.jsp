@@ -63,7 +63,7 @@
 				<div class="table-responsive">
 					<table class="table table-bordered">
 						<tr>
-							<th width="50" class="text-info">禮盒編號</th>
+							<th width="50" class="text-info">編號</th>
 							<th width="130" class="text-info">禮盒名稱</th>
 							<th width="150" class="text-info">產品ㄧ</th>
 							<th width="150" class="text-info">產品二</th>
@@ -71,7 +71,7 @@
 							<th width="150" class="text-info">產品四</th>
 							<th width="150" class="text-info">產品五</th>
 							<th width="60" class="text-info">單價</th>
-							<th width="60" class="text-info">產品下架</th>
+							<th width="60" class="text-info">下架</th>
 							<th width="50" class="text-info">編輯</th>
 							<th width="50" class="text-info">刪除</th>
 						</tr>

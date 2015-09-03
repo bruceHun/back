@@ -81,7 +81,7 @@
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown">訂單管理<span class="caret"></span></a>
 					<ul class="dropdown-menu" role="menu">
-						<li><a href="#">訂單查詢</a></li>
+						<li><a href="OrderSearch.jsp">訂單查詢</a></li>
 						<li><a href="#">訂單處理</a></li>
 					</ul></li>
 
