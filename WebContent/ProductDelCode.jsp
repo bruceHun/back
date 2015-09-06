@@ -15,4 +15,3 @@ dao.delete(p);
 response.sendRedirect("productlist.jsp");
 %>
 
-<!-- LightBox -->

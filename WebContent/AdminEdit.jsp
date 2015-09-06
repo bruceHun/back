@@ -1,16 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"
 	import="shopping.DAO.*,shopping.Class.*, java.util.*"%>
-	<%
-	if(session.getAttribute("LogOK")==null){
+<%
+	if ((String)session.getAttribute("LogOK") != "admin") {
 		response.sendRedirect("login.jsp");
 	}
-	%>
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>會員列表</title>
+<title>帳號管理</title>
 <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" href="bootstrap/css/bootstrap-theme.min.css">
 <link rel="stylesheet"
@@ -27,9 +27,9 @@
 			<jsp:include page="header.jsp" />
 		</div>
 		<div id="content">
-			<div class="page-header">
+		<div class="page-header">
 				<h1 align="center">
-					會員管理 <small>會員資訊</small>
+					系統管理 <small>帳號管理</small>
 				</h1>
 			</div>
 
@@ -47,55 +47,35 @@
 
 				}
 
+				ProductCategoryDAO pcd = new ProductCategoryDAOimpl();
+				
 				final int PAGE_SIZE = 5;
 				int start_loc = (pg - 1) * PAGE_SIZE + 1;
-				MembershipDAO md = new MembershipDAOimpl();
-				CustomerDAO cd = new CustomerDAOimpl();
-				
-				
-				ArrayList<Membership> list = md.getRange(start_loc, PAGE_SIZE);
-				int TotalRows = md.getSize();
+				AdministratorDAO ad = new AdministratorDAOimpl();
+				ArrayList<Administrator> list = ad.getRange(start_loc, PAGE_SIZE);
+				int TotalRows = ad.getSize();
 				int TotalPages = (int) Math.ceil((double) TotalRows / (double) PAGE_SIZE);
-				Membership m = null;
-				Customer c = null;
 			%>
 
 			<div class="container">
-				<p/>
 				<div class="table-responsive col-sm-offset-3 col-sm-6">
 					<table class="table table-bordered">
 						<tr>
-							<th width="75" class="text-info">客戶編號</th>
-							<th width="75" class="text-info">客戶姓名</th>
-							<th width="75" class="text-info">帳號</th>
-							<th width="100" class="text-info">會員狀態</th>
-							<th width="50" class="text-info">編輯</th>
+							<th width="100" class="text-info">帳號</th>
+							<th width="100" class="text-info">權限</th>
+							<th width="50"class="text-info">編輯</th>
 							<th width="50" class="text-info">刪除</th>
 						</tr>
 						<%
-							//for (Membership m : list) {
-							for (int i = 0; i<TotalRows; i++) {
-								int index = list.get(i).getCustomerID();
-								c = cd.searchbyID(index);
+							for (Administrator a : list) {
 						%>
 						<tr>
-							<td><%=index%></td>
-							<td><%=c.getCustomerName() %></td>
-							<td><%=list.get(i).getAccount()%></td>
-							<td>
-							<select
-								class="form-control" id="categoryid" name="categoryid">
-								<% int state = list.get(i).getMembership(); %>								
-								<option value="0" <%if (state==0){ %> Selected <% } %>>正常</option>
-								<option value="1" <%if (state==1){ %> Selected <% } %>>停權</option>
-								
-							</select>
-							</td>
-							
-							<td><a href="ProductEdit.jsp?id=<%=index%>">
+							<td><%=a.getAccount() %></td>
+							<td><%=a.getLevel() %></td>
+							<td><a href="ProductEdit.jsp?id=<%=a.getAccount() %>">
 									<button type="button" class="btn btn-primary btn-sm">編輯</button>
 							</a></td>
-							<td><a href="ProductDelCode.jsp?id=<%=index%>"
+							<td><a href="ProductDelCode.jsp?id=<%=a.getAccount() %>"
 								onclick="return confirm('確認刪除');">
 									<button type="button" class="btn btn-danger btn-sm">刪除</button>
 							</a></td>
@@ -127,7 +107,7 @@
 
 							<li <%if (loc == 0) {%> class="disabled"><a href="#"
 								<%} else {%>><a
-									href="MembershipList.jsp?p=<%=(loc - 1) * PAGE_RANGE + 1%>" <%}%>
+									href="productlist.jsp?p=<%=(loc - 1) * PAGE_RANGE + 1%>" <%}%>
 									aria-label="previou"><span aria-hidden="true">&laquo;</span>
 								</a></li>
 
@@ -141,7 +121,7 @@
 							<%
 								} else {
 							%>
-							<li><a href="MemberShipList.jsp?p=<%=i%>"><%=i%></a></li>
+							<li><a href="productlist.jsp?p=<%=i%>"><%=i%></a></li>
 							<%
 								}
 							%>
@@ -149,7 +129,7 @@
 								}
 							%>
 							<li <%if (TotalPages <= end_num) {%> class="disabled" ><a href="#"<%}else{%>><a
-								href="MembershipList.jsp?p=<%=i%>" <%} %>aria-label="next"><span
+								href="productlist.jsp?p=<%=i%>" <%} %>aria-label="next"><span
 									aria-hidden="true">&raquo;</span> </a></li>
 
 
@@ -157,18 +137,20 @@
 						</nav>
 					</div>
 				</div>
+				<!-- --------------------------------------------------------------------------------- -->
 				
+
 				<!-- --------------------------------------------------------------------------------- -->
 
 			</div>
 
 
 		</div>
-		
+
 		<div id="footer">
 			<jsp:include page="footer.jsp" />
 		</div>
-		
+
 	</div>
 </body>
 </html>

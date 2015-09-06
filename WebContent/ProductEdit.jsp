@@ -19,6 +19,17 @@
 <link rel="stylesheet" href="css/mysite.css">
 <script src="jquery/jquery.js"></script>
 <script src="bootstrap/js/bootstrap.min.js"></script>
+<script language="javascript">
+
+function trimSpaces(){
+	s = document.getElementById("descri").value;
+	s = s.replace(/(^\s*)|(\s*$)/gi,"");
+	s = s.replace(/[ ]{2,}/gi," ");
+	s = s.replace(/\n /,"\n");
+	document.getElementById("descri").value = s;
+}
+	
+</script>
 </head>
 <body>
 
@@ -60,7 +71,7 @@
 				<br />
 				<br />
 				<form class="form-horizontal" name="product"
-					action="ProductEditCode.jsp" method="post">
+					action="ProductEditCode.jsp" method="post" onSubmit="trimSpaces()">
 					<input type="hidden" name=productid
 						value="<%out.print(p.getProductID());%>" />
 
@@ -76,11 +87,11 @@
 						<div class="form-group">
 							<label for="categoryid">產品類別：</label> <select
 								class="form-control" id="categoryid" name="categoryid">
-								<option value=<%=p.getCategoryID()%> Selected>未修改--<%=pcd.searchbyID(p.getCategoryID()).getCategoryName()%></option>
+								
 								<%
 									for (ProductCategory pc : list) {
 								%>
-								<option value=<%=pc.getCategoryID()%>><%=pc.getCategoryID()%>.<%=pc.getCategoryName()%></option>
+								<option value=<%=pc.getCategoryID()%> <%if(p.getCategoryID() == pc.getCategoryID()) {%> Selected <% } %>><%=pc.getCategoryID()%>.<%=pc.getCategoryName()%></option>
 								<%
 									}
 								%>
@@ -114,18 +125,11 @@
 						</div>
 
 						<div class="form-group">
-							<label for="discon">商品下架：</label> <select class="form-control"
+							<label for="discon">商品狀態：</label> <select class="form-control"
 								id="discon" name="discon">
-								<option value=<%=p.getDiscontinued()%> Selected>未修改--<%
-									if (p.getDiscontinued() == 1) {
-										out.print("下架");
-									} else {
-										out.print("未下架");
-									}
-								%>
-								</option>
-								<option value="0">未下架</option>
-								<option value="1">下架</option>
+								<% int state = p.getDiscontinued();%>
+								<option value="0" <%if (state==0){ %> Selected <% } %>>銷售中</option>
+								<option value="1" <%if (state==1){ %> Selected <% } %>>已下架</option>
 							</select>
 						</div>
 

@@ -59,12 +59,12 @@
 
 			<div class="container">
 				<p/>
-				<div class="table-responsive">
+				<div class="table-responsive col-sm-offset-2 col-sm-8">
 					<table class="table table-bordered">
 						<tr>
 							<th width="75" class="text-info">庫存編號</th>
 							<th width="75" class="text-info">產品編號</th>
-							<th width="150" class="text-info">產品名稱及容量</th>
+							<th width="180" class="text-info">產品名稱及容量</th>
 							<th width="75" class="text-info">成本</th>
 							<th width="75" class="text-info">庫存量</th>
 							<th width="75" class="text-info">待出貨</th>
@@ -101,46 +101,52 @@
 
 
 				<br />
-				<div class="row">
+				<div class="row col-sm-12">
 
 					<div align="center">
 						<nav>
 						<ul class="pagination">
 							<%
-								final int PAGE_RANGE = 5;
-								int loc = (pg - 1) / PAGE_RANGE;
-								int start_num = loc * PAGE_RANGE + 1;
-								int end_num = loc * PAGE_RANGE + PAGE_RANGE;
-								int uplimit = (TotalPages > end_num) ? end_num : TotalPages;
+								final int PAGE_RANGE = 3; //設定pagination長度
+								int loc = (pg - 1) / PAGE_RANGE; //int不會有小數
+								int start_num = loc * PAGE_RANGE + 1; //計算pagination起始值
+								int end_num = loc * PAGE_RANGE + PAGE_RANGE; //計算每頁末碼
+								int uplimit = (TotalPages > end_num) ? end_num : TotalPages; //設定末碼上限
 								int i;
-								for (i = start_num; i <= uplimit; i++) {
-							%>
-							<%
-								if (end_num < start_num) {
-							%>
-							<li><a href="productlist.jsp?p=<%=i%>">Prev <%=PAGE_RANGE%>
-									Pages <span aria-hidden="true">&laquo;</span>
-							</a></li>
-							<%
-								}
+								//for (i = start_num; i <= uplimit; i++) {
 							%>
 
-							<li><a href="productlist.jsp?p=<%=i%>"><%=i%></a></li>
+							<li <%if (loc == 0) {%> class="disabled"><a href="#"
+								<%} else {%>><a
+									href="InventoryList.jsp?p=<%=(loc - 1) * PAGE_RANGE + 1%>" <%}%>
+									aria-label="previou"><span aria-hidden="true">&laquo;</span>
+								</a></li>
+
+							<%
+								//}
+								for (i = start_num; i <= uplimit; i++) {
+									if (pg == i) {
+							%>
+							<li class="active"><a href="#"><%=i%><span
+									class="sr-only"></span></a></li>
+							<%
+								} else {
+							%>
+							<li><a href="InventoryList.jsp?p=<%=i%>"><%=i%></a></li>
 							<%
 								}
-								if (TotalPages > end_num) {
 							%>
-							<li><a href="productlist.jsp?p=<%=i%>">Next <%=PAGE_RANGE%>
-									Pages <span aria-hidden="true">&raquo;</span>
-							</a></li>
 							<%
 								}
 							%>
+							<li <%if (TotalPages <= end_num) {%> class="disabled" ><a href="#"<%}else{%>><a
+								href="InventoryList.jsp?p=<%=i%>" <%} %>aria-label="next"><span
+									aria-hidden="true">&raquo;</span> </a></li>
+
 
 						</ul>
 						</nav>
 					</div>
-					<div class="col-xs-4"></div>
 				</div>
 				
 				<!-- --------------------------------------------------------------------------------- -->

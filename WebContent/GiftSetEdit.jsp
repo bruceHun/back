@@ -10,7 +10,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>新增產品組合</title>
+<title>產品組合修改</title>
 
 <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" href="bootstrap/css/bootstrap-theme.min.css">
@@ -59,8 +59,9 @@
 				<br />
 				<br />
 				<form class="form-horizontal" name="product"
-					action="GiftSetAddCode.jsp" method="post">
-
+					action="GiftSetEditCode.jsp" method="post">
+					<input type="hidden" name=giftsetid
+						value="<%=g.getGiftSetID()%>" />
 
 					<!-- -------------------------------------------------------------------------------------- -->
 					<div class="col-sm-offset-2 col-sm-3">
@@ -158,10 +159,10 @@
 						</div>
 
 						<div class="form-group">
-							<label for="discon">商品下架：</label> <select class="form-control"
-								id="discon" name="discon" value=<%=g.getDiscontinued() %>>
-								<option value="0">未下架</option>
-								<option value="1">下架</option>
+							<label for="discon">商品狀態：</label> <select class="form-control"
+								id="discon" name="discon" <% int state = g.getDiscontinued(); %>>
+								<option value="0" <%if (state==0){ %> Selected <% } %>>銷售中</option>
+								<option value="1" <%if (state==1){ %> Selected <% } %>>已下架</option>
 							</select>
 						</div>
 					</div>
@@ -169,7 +170,7 @@
 
 					<div class="form-group">
 						<div class="col-sm-12" align="center">
-							<button type="submit" class="btn btn-default">確認新增</button>
+							<button type="submit" class="btn btn-default">確認修改</button>
 						</div>
 					</div>
 

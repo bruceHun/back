@@ -7,8 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-			<div class="panel-footer text-center">
-				<p>Copyright (c) 2015 版權聲明</p>
+			<div class="panel-footer panel-inverse text-center">
+				<p>Copyright © 2015 30ja co. All rights reserved</p>
 			</div>
 </body>
 </html>

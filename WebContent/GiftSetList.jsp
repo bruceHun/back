@@ -71,7 +71,8 @@
 							<th width="150" class="text-info">產品四</th>
 							<th width="150" class="text-info">產品五</th>
 							<th width="60" class="text-info">單價</th>
-							<th width="60" class="text-info">下架</th>
+							<th width="60" class="text-info">狀態</th>
+							<th width="50" class="text-info">圖片</th>
 							<th width="50" class="text-info">編輯</th>
 							<th width="50" class="text-info">刪除</th>
 						</tr>
@@ -110,12 +111,17 @@
 							<td>
 								<%
 									if (g.getDiscontinued() == 1) {
-											out.print("下架");
+											out.print("已下架");
 										} else {
-											out.print("未下架");
+											out.print("銷售中");
 										}
 								%>
 							</td>
+							
+							<td><form action="PicUpload.jsp" method="post">
+							<input type="hidden" name="id" value="g_<%=g.getGiftSetID() %>">
+							<button type="submit" class="btn btn-success btn-sm">上傳</button>
+							</form></td>
 
 							<td><a href="GiftSetEdit.jsp?id=<%=g.getGiftSetID()%>">
 									<button type="button" class="btn btn-primary btn-sm">編輯</button>
@@ -141,40 +147,46 @@
 						<nav>
 						<ul class="pagination">
 							<%
-								final int PAGE_RANGE = 5;
-								int loc = (pg - 1) / PAGE_RANGE;
-								int start_num = loc * PAGE_RANGE + 1;
-								int end_num = loc * PAGE_RANGE + PAGE_RANGE;
-								int uplimit = (TotalPages > end_num) ? end_num : TotalPages;
+								final int PAGE_RANGE = 3; //設定pagination長度
+								int loc = (pg - 1) / PAGE_RANGE; //int不會有小數
+								int start_num = loc * PAGE_RANGE + 1; //計算pagination起始值
+								int end_num = loc * PAGE_RANGE + PAGE_RANGE; //計算每頁末碼
+								int uplimit = (TotalPages > end_num) ? end_num : TotalPages; //設定末碼上限
 								int i;
-								for (i = start_num; i <= uplimit; i++) {
-							%>
-							<%
-								if (end_num < start_num) {
-							%>
-							<li><a href="GiftSetList.jsp?p=<%=i%>">Prev <%=PAGE_RANGE%>
-									Pages <span aria-hidden="true">&laquo;</span>
-							</a></li>
-							<%
-								}
+								//for (i = start_num; i <= uplimit; i++) {
 							%>
 
+							<li <%if (loc == 0) {%> class="disabled"><a href="#"
+								<%} else {%>><a
+									href="GiftSetList.jsp?p=<%=(loc - 1) * PAGE_RANGE + 1%>" <%}%>
+									aria-label="previou"><span aria-hidden="true">&laquo;</span>
+								</a></li>
+
+							<%
+								//}
+								for (i = start_num; i <= uplimit; i++) {
+									if (pg == i) {
+							%>
+							<li class="active"><a href="#"><%=i%><span
+									class="sr-only"></span></a></li>
+							<%
+								} else {
+							%>
 							<li><a href="GiftSetList.jsp?p=<%=i%>"><%=i%></a></li>
 							<%
 								}
-								if (TotalPages > end_num) {
 							%>
-							<li><a href="GiftSetList.jsp?p=<%=i%>">Next <%=PAGE_RANGE%>
-									Pages <span aria-hidden="true">&raquo;</span>
-							</a></li>
 							<%
 								}
 							%>
+							<li <%if (TotalPages <= end_num) {%> class="disabled" ><a href="#"<%}else{%>><a
+								href="GiftSetList.jsp?p=<%=i%>" <%} %>aria-label="next"><span
+									aria-hidden="true">&raquo;</span> </a></li>
+
 
 						</ul>
 						</nav>
 					</div>
-					
 				</div>
 
 				<!-- --------------------------------------------------------------------------------- -->

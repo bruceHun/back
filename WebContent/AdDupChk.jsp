@@ -9,7 +9,7 @@ String s = request.getParameter("account");
     	try
     	{    		
     		AdministratorDAO dao = new AdministratorDAOimpl();
-    		adm = dao.searchbyID(s);
+    		adm = dao.searchbyAccount(s);
     		
     	    if (adm == null)
     	    {

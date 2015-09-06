@@ -5,8 +5,8 @@
  */
 
 /*!
- * Generated using the Bootstrap Customizer (http://getbootstrap.com/customize/?id=402321e3263273ee8965)
- * Config saved to config.json and https://gist.github.com/402321e3263273ee8965
+ * Generated using the Bootstrap Customizer (http://getbootstrap.com/customize/?id=571f814a3ab1dc7fce86)
+ * Config saved to config.json and https://gist.github.com/571f814a3ab1dc7fce86
  */
 /*!
  * Bootstrap v3.3.5 (http://getbootstrap.com)
@@ -5534,7 +5534,7 @@ button.list-group-item-danger.active:focus {
 }
 .panel-footer {
   padding: 10px 15px;
-  background-color: #f5f5f5;
+  background-color: #b8860b;
   border-top: 1px solid #dddddd;
   border-bottom-right-radius: 3px;
   border-bottom-left-radius: 3px;
@@ -5735,22 +5735,22 @@ button.list-group-item-danger.active:focus {
   border-bottom: 1px solid #dddddd;
 }
 .panel-default {
-  border-color: #dddddd;
+  border-color: #614910;
 }
 .panel-default > .panel-heading {
   color: #333333;
   background-color: #f5f5f5;
-  border-color: #dddddd;
+  border-color: #614910;
 }
 .panel-default > .panel-heading + .panel-collapse > .panel-body {
-  border-top-color: #dddddd;
+  border-top-color: #614910;
 }
 .panel-default > .panel-heading .badge {
   color: #f5f5f5;
   background-color: #333333;
 }
 .panel-default > .panel-footer + .panel-collapse > .panel-body {
-  border-bottom-color: #dddddd;
+  border-bottom-color: #614910;
 }
 .panel-primary {
   border-color: #337ab7;

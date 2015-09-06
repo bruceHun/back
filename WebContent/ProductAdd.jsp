@@ -146,14 +146,14 @@
 			<jsp:include page="header.jsp" />
 		</div>
 		<div id="content">
-		<div class="page-header">
+			<div class="page-header">
 				<h1 align="center">
 					商品管理 <small>新增商品</small>
 				</h1>
 			</div>
 
 			<div class="container">
-				<br /> <br /> <br />
+				<br />
 				<form class="form-horizontal" name="product"
 					action="ProductAddCode.jsp" method="post"
 					onSubmit="return check_data()">
@@ -162,7 +162,7 @@
 					<!-- -------------------------------------------------------------------------------------- -->
 					<div class="col-sm-offset-2 col-sm-3">
 						<div class="form-group ">
-							<label for="barcode">國碼：</label> <input type="text"
+							<label for="barcode">國　　碼：</label> <input type="text"
 								class="form-control" id="barcode" name="barcode"
 								placeholder="國碼">
 						</div>
@@ -191,31 +191,49 @@
 							<label for="unit">商品單位：</label> <input type="text"
 								class="form-control" id="unit" name="unit" placeholder="商品單位">
 						</div>
-					</div>
-					<!-- -------------------------------------------------------------------------------------- -->
-					<div class="col-sm-offset-2 col-sm-3">
+
 						<div class="form-group">
 							<label for="capacity">商品容量：</label> <input type="text"
 								class="form-control" id="capacity" name="capacity"
 								placeholder="商品容量">
 						</div>
-						<p />
+
 						<div class="form-group">
 							<label for="price">商品單價：</label> <input type="text"
 								class="form-control" id="price" name="price" placeholder="商品單價">
+						</div>
+					</div>
+					<!-- -------------------------------------------------------------------------------------- -->
+					<div class="col-sm-offset-2 col-sm-3">
+						<div class="form-group">
+							<label for="cost">成　　本：</label> <input type="text"
+								class="form-control" id="cost" name="cost"
+								placeholder="成本">
+						</div>
+						
+						<div class="form-group">
+							<label for="stock">庫　　存：</label> <input type="text"
+								class="form-control" id="stock" name="stock"
+								placeholder="庫存">
+						</div>
+						
+						<div class="form-group">
+							<label for="safety">安全存量：</label> <input type="text"
+								class="form-control" id="safety" name="safety"
+								placeholder="安全存量">
 						</div>
 
 						<div class="form-group">
 							<label for="discon">商品下架：</label> <select class="form-control"
 								id="discon" name="discon">
-								<option value="0">未下架</option>
-								<option value="1">下架</option>
+								<option value="0">銷售中</option>
+								<option value="1">已下架</option>
 							</select>
 						</div>
 
 						<div class="form-group">
-							<label for="descri">商品資訊：</label> <textarea class="form-control" rows="5"
-								id="descri" name="descri"
+							<label for="descri">商品資訊：</label>
+							<textarea class="form-control" rows="5" id="descri" name="descri"
 								placeholder="商品資訊">
 								</textarea>
 

@@ -2,13 +2,13 @@
     pageEncoding="UTF-8"
     import="shopping.Business.*,shopping.DAO.*,shopping.Class.*, java.util.*"%>
 <%
-String s = request.getParameter("account");
-Administrator ad = new Administrator(s, SavePWD.encode(request.getParameter("password")),"1");
+String s = new String(request.getParameter("account").getBytes("ISO-8859-1"),"utf-8");
+Administrator ad = new Administrator(s, SavePWD.encode(request.getParameter("password")),"user");
 AdministratorDAO dao = new AdministratorDAOimpl();
 dao.add(ad);
-session.setAttribute("LogOK", "yes");
-session.setAttribute("acc", s);
-response.sendRedirect("index.jsp");
+session.setAttribute("LogOK", "yes"); 	//設定一般權限登入屬性
+session.setAttribute("acc", s);			//設定紀錄登入帳號屬性
+response.sendRedirect("index.jsp");		
 %>    
 
 

@@ -27,7 +27,7 @@
 			<jsp:include page="header.jsp" />
 		</div>
 		<div id="content">
-		<div class="page-header">
+			<div class="page-header">
 				<h1 align="center">
 					商品管理 <small>商品資料維護</small>
 				</h1>
@@ -48,13 +48,13 @@
 				}
 
 				ProductCategoryDAO pcd = new ProductCategoryDAOimpl();
-				
-				final int PAGE_SIZE = 5;
-				int start_loc = (pg - 1) * PAGE_SIZE + 1;
+
+				final int PAGE_SIZE = 5; //設定列數
+				int start_loc = (pg - 1) * PAGE_SIZE + 1; //設定每頁的起始值，上一頁的列數＋1
 				ProductDAO pd = new ProductDAOimpl();
-				ArrayList<Product> list = pd.getRange(start_loc, PAGE_SIZE);
-				int TotalRows = pd.getSize();
-				int TotalPages = (int) Math.ceil((double) TotalRows / (double) PAGE_SIZE);
+				ArrayList<Product> list = pd.getRange(start_loc, PAGE_SIZE); //用MySQL Limit 取得一頁的範圍資料
+				int TotalRows = pd.getSize(); //取得資料總列數
+				int TotalPages = (int) Math.ceil((double) TotalRows / (double) PAGE_SIZE); //總列數除以每頁列數=總頁數
 			%>
 
 			<div class="container">
@@ -68,8 +68,9 @@
 							<th width="75" class="text-info">單位</th>
 							<th width="75" class="text-info">容量</th>
 							<th width="75" class="text-info">單價</th>
-							<th width="75" class="text-info">產品下架</th>
+							<th width="75" class="text-info">產品狀態</th>
 							<th class="text-info">產品資訊</th>
+							<th class="text-info">圖片</th>
 							<th class="text-info">編輯</th>
 							<th class="text-info">刪除</th>
 						</tr>
@@ -87,13 +88,20 @@
 							<td>
 								<%
 									if (p.getDiscontinued() == 1) {
-											out.print("下架");
+											out.print("已下架");
 										} else {
-											out.print("未下架");
+											out.print("銷售中");
 										}
 								%>
 							</td>
 							<td><%=p.getDescription()%></td>
+							<td>
+							<form action="PicUpload.jsp" method="post">
+							<input type="hidden" name="id" value="s_<%=p.getProductID() %>">
+							<button type="submit" class="btn btn-success btn-sm">上傳</button>
+							</form>
+									
+							</td>
 							<td><a href="ProductEdit.jsp?id=<%=p.getProductID()%>">
 									<button type="button" class="btn btn-primary btn-sm">編輯</button>
 							</a></td>
@@ -118,42 +126,49 @@
 						<nav>
 						<ul class="pagination">
 							<%
-								final int PAGE_RANGE = 5;
-								int loc = (pg - 1) / PAGE_RANGE;
-								int start_num = loc * PAGE_RANGE + 1;
-								int end_num = loc * PAGE_RANGE + PAGE_RANGE;
-								int uplimit = (TotalPages > end_num) ? end_num : TotalPages;
+								final int PAGE_RANGE = 5; //設定pagination長度
+								int loc = (pg - 1) / PAGE_RANGE; //int不會有小數
+								int start_num = loc * PAGE_RANGE + 1; //計算pagination起始值
+								int end_num = loc * PAGE_RANGE + PAGE_RANGE; //計算每頁末碼
+								int uplimit = (TotalPages > end_num) ? end_num : TotalPages; //設定末碼上限
 								int i;
-								for (i = start_num; i <= uplimit; i++) {
-							%>
-							<%
-								if (end_num < start_num) {
-							%>
-							<li><a href="productlist.jsp?p=<%=i%>">Prev <%=PAGE_RANGE%>
-									Pages <span aria-hidden="true">&laquo;</span>
-							</a></li>
-							<%
-								}
+								//for (i = start_num; i <= uplimit; i++) {
 							%>
 
+							<li <%if (loc == 0) {%> class="disabled"><a href="#"
+								<%} else {%>><a
+									href="productlist.jsp?p=<%=(loc - 1) * PAGE_RANGE + 1%>" <%}%>
+									aria-label="previou"><span aria-hidden="true">&laquo;</span>
+								</a></li>
+
+							<%
+								//}
+								for (i = start_num; i <= uplimit; i++) {
+									if (pg == i) {
+							%>
+							<li class="active"><a href="#"><%=i%><span
+									class="sr-only"></span></a></li>
+							<%
+								} else {
+							%>
 							<li><a href="productlist.jsp?p=<%=i%>"><%=i%></a></li>
 							<%
 								}
-								if (TotalPages > end_num) {
 							%>
-							<li><a href="productlist.jsp?p=<%=i%>">Next <%=PAGE_RANGE%>
-									Pages <span aria-hidden="true">&raquo;</span>
-							</a></li>
 							<%
 								}
 							%>
+							<li <%if (TotalPages <= end_num) {%> class="disabled" ><a href="#"<%}else{%>><a
+								href="productlist.jsp?p=<%=i%>" <%} %>aria-label="next"><span
+									aria-hidden="true">&raquo;</span> </a></li>
+
 
 						</ul>
 						</nav>
 					</div>
 				</div>
 				<!-- --------------------------------------------------------------------------------- -->
-				
+
 
 				<!-- --------------------------------------------------------------------------------- -->
 

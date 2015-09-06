@@ -50,6 +50,10 @@
 						</a></li>
 						<li><a href="NewAdmin.jsp">註冊帳號</a></li>
 						<li><a href="NewAdmin.jsp">帳號管理</a></li>
+						<% if(s=="admin") {%>
+						<li class="divider"></li>
+						<li><a href="AdminEdit.jsp">系統管理</a></li>
+						<% } %>
 					</ul></li>
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown">會員管理<span class="caret"></span></a>
@@ -71,7 +75,7 @@
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown">進出貨管理<span class="caret"></span></a>
 					<ul class="dropdown-menu" role="menu">
-						<li><a href="#">進貨</a></li>
+						<li><a href="inventoryAdd.jsp">進貨</a></li>
 						<li><a href="#">出貨</a></li>
 						<li><a href="#">退貨</a></li>
 						<li class="divider"></li>

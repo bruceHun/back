@@ -309,9 +309,9 @@
     "@panel-footer-padding": "@panel-heading-padding",
     "@panel-border-radius": "@border-radius-base",
     "@panel-inner-border": "#ddd",
-    "@panel-footer-bg": "#f5f5f5",
+    "@panel-footer-bg": "#b8860b",
     "@panel-default-text": "@gray-dark",
-    "@panel-default-border": "#ddd",
+    "@panel-default-border": "#614910",
     "@panel-default-heading-bg": "#f5f5f5",
     "@panel-primary-text": "#fff",
     "@panel-primary-border": "@brand-primary",
@@ -430,5 +430,5 @@
     "scrollspy.js",
     "transition.js"
   ],
-  "customizerUrl": "http://getbootstrap.com/customize/?id=402321e3263273ee8965"
+  "customizerUrl": "http://getbootstrap.com/customize/?id=571f814a3ab1dc7fce86"
 }

@@ -19,12 +19,6 @@
 <script src="jquery/jquery.js"></script>
 <script src="bootstrap/js/bootstrap.min.js"></script>
 
-<script language="javascript">
-	function alert() {
-		alert('查無資料');
-	}
-</script>
-
 </head>
 <body>
 
@@ -58,6 +52,8 @@
 				OrderDAO od = new OrderDAOimpl();
 				Order o = new Order();
 				CustomerDAO cd = new CustomerDAOimpl();
+				ProductDAO pd = new ProductDAOimpl();
+				GiftSetDAO gd = new GiftSetDAOimpl();
 
 				final int PAGE_SIZE = 5;
 				int start_loc = (pg - 1) * PAGE_SIZE + 1;
@@ -93,9 +89,9 @@
 					list = null;
 				}
 
-				/*ArrayList<OrderDetail> list = oddd.getRange(start_loc, PAGE_SIZE);
+				list = oddd.getRange(start_loc, PAGE_SIZE);
 				int TotalRows = oddd.getSize();
-				int TotalPages = (int) Math.ceil((double) TotalRows / (double) PAGE_SIZE);*/
+				int TotalPages = (int) Math.ceil((double) TotalRows / (double) PAGE_SIZE);
 			%>
 
 			<div class="container">
@@ -129,8 +125,8 @@
 							<th width="100" class="text-info">出貨日期</th>
 							<th width="75" class="text-info">折扣編號</th>
 							<th width="75" class="text-info">取消訂貨</th>
-							<th width="75" class="text-info">產品編號</th>
-							<th width="75" class="text-info">禮盒編號</th>
+							<th width="120" class="text-info">產品名稱及容量</th>
+							<th width="75" class="text-info">禮盒名稱</th>
 							<th width="75" class="text-info">成交金額</th>
 							<th width="50" class="text-info">數量</th>
 							<th width="50" class="text-info">修改</th>
@@ -142,6 +138,8 @@
 								for (OrderDetail odd : list) {
 									int index = odd.getOrderID();
 									o = od.searchbyID(index);
+									Product p = pd.searchbyID(odd.getProductID());
+									GiftSet g = gd.searchbyID(odd.getGiftSetID());
 						%>
 						<tr>
 							<td><%=index%></td>
@@ -150,9 +148,9 @@
 							<td><%=o.getOrderDate()%></td>
 							<td><%=o.getShipDate()%></td>
 							<td><%=o.getDiscountID()%></td>
-							<td><%=o.getCanceled()%></td>
-							<td><%=odd.getProductID()%></td>
-							<td><%=odd.getGiftSetID()%></td>
+							<td><% if(o.getCanceled()==0){out.print("未取消");}else{out.print("取消");}%></td>
+							<td><%if(p!=null){%><%=p.getProductName() %>--<%=p.getCapacity() %><%}else{out.print("");} %></td>
+							<td><%if(g!=null){out.print(g.getGiftSetName());}if(g==null){out.print("");} %></td>
 							<td><%=odd.getSalesPrice()%></td>
 							<td><%=odd.getQuantity()%></td>
 
@@ -180,6 +178,54 @@
 
 
 
+				</div>
+				
+				<div class="row">
+
+					<div align="center">
+						<nav>
+						<ul class="pagination">
+							<%
+								final int PAGE_RANGE = 3; //設定pagination長度
+								int loc = (pg - 1) / PAGE_RANGE; //int不會有小數
+								int start_num = loc * PAGE_RANGE + 1; //計算pagination起始值
+								int end_num = loc * PAGE_RANGE + PAGE_RANGE; //計算每頁末碼
+								int uplimit = (TotalPages > end_num) ? end_num : TotalPages; //設定末碼上限
+								int i;
+								//for (i = start_num; i <= uplimit; i++) {
+							%>
+
+							<li <%if (loc == 0) {%> class="disabled"><a href="#"
+								<%} else {%>><a
+									href="OrderSearch.jsp?p=<%=(loc - 1) * PAGE_RANGE + 1%>" <%}%>
+									aria-label="previou"><span aria-hidden="true">&laquo;</span>
+								</a></li>
+
+							<%
+								//}
+								for (i = start_num; i <= uplimit; i++) {
+									if (pg == i) {
+							%>
+							<li class="active"><a href="#"><%=i%><span
+									class="sr-only"></span></a></li>
+							<%
+								} else {
+							%>
+							<li><a href="OrderSearch.jsp?p=<%=i%>"><%=i%></a></li>
+							<%
+								}
+							%>
+							<%
+								}
+							%>
+							<li <%if (TotalPages <= end_num) {%> class="disabled" ><a href="#"<%}else{%>><a
+								href="OrderSearch.jsp?p=<%=i%>" <%} %>aria-label="next"><span
+									aria-hidden="true">&raquo;</span> </a></li>
+
+
+						</ul>
+						</nav>
+					</div>
 				</div>
 
 
