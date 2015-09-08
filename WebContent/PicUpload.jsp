@@ -14,7 +14,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>File Upload</title>
+<title>Pics Upload</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" href="bootstrap/css/bootstrap-theme.min.css">
@@ -36,11 +36,11 @@
 				$(".sr-only").html(percentComplete+'%');
 			},
 			success:function(){
-				$(".msg").html("<h2>上傳中</h2>")
+				//$(".msg").html("<h2>上傳中</h2>")
 			},
 			complete:function(response){
 				
-				window.location="index.jsp";
+				//window.location="index.jsp";
 			}
 		});
 		$(".progress").hide();

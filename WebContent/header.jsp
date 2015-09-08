@@ -76,8 +76,7 @@
 					data-toggle="dropdown">進出貨管理<span class="caret"></span></a>
 					<ul class="dropdown-menu" role="menu">
 						<li><a href="inventoryAdd.jsp">進貨</a></li>
-						<li><a href="#">出貨</a></li>
-						<li><a href="#">退貨</a></li>
+						<li><a href="inventoryOut.jsp">出貨</a></li>
 						<li class="divider"></li>
 						<li><a href="InventoryList.jsp">檢視庫存</a></li>
 					</ul></li>
