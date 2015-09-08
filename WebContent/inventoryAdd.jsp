@@ -40,8 +40,8 @@ t2.value = quan.value;
 		ProductCategoryDAO pcd = new ProductCategoryDAOimpl();
 		ProductDAO pd = new ProductDAOimpl();
 		ArrayList<ProductCategory> pclist = pcd.showAll();
-		ArrayList<Product> plist = new ArrayList<>();
-		Set<String> set = new TreeSet<>();
+		ArrayList<Product> plist = new ArrayList<Product>();
+		Set<String> set = new TreeSet<String>();
 
 		String cid = request.getParameter("categoryid");
 		int index;		

@@ -151,7 +151,7 @@
 			</div>
 
 		</div>
-		<div>
+		<div id="footer">
 			<jsp:include page="footer.jsp" />
 		</div>
 

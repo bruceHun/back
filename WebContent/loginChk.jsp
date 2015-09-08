@@ -46,7 +46,7 @@ String pwd = SavePWD.encode(request.getParameter("password"));
     	session.setAttribute("acc",acc);
     	
     	String id = session.getId();
-		ArrayList<Product> plist = new ArrayList<>();
+		ArrayList<Product> plist = new ArrayList<Product>();
 		session.setAttribute(id, plist);
     	//String t = session.getAttribute("LogOK").toString();
     	//System.out.print(t);

@@ -62,7 +62,7 @@
 				System.out.print(request.getParameter("searchby"));
 				String sb = request.getParameter("searchby");
 
-				ArrayList<OrderDetail> list = new ArrayList<>();
+				ArrayList<OrderDetail> list = new ArrayList<OrderDetail>();
 				try {
 					if (s != "" && s != null) {
 						//System.out.print(s);
